@@ -1,0 +1,2 @@
+export const RestaurantCardImageUrl = `https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/`;
+export const LogoImageUrl = `https://static.vecteezy.com/system/resources/previews/050/816/833/non_2x/swiggy-transparent-icon-free-png.png`;

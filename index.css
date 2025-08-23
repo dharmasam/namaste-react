@@ -1,6 +1,158 @@
-h1{
-    color: red;
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 5px;
 }
-div{
-    color: purple;
+
+.logo {
+    width: 7%;
+    height: 7%;
+    cursor: pointer;
+}
+
+.logo:hover {
+    transform: scale(1.5);
+    transition: transform 0.3s ease-in-out;
+}
+
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-bar > ul > li {
+    margin: 20px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Gilroy, Arial, sans-serif !important;
+    
+}
+.nav-bar > ul {
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+}
+
+.nav-bar > ul > li:hover {
+    color: #ff6600;
+    transition: color 0.3s ease-in-out;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 10px;
+}
+
+.restaurant-card {
+    border-radius: 8px;
+    padding: 10px;
+    width: 250px;
+    height: 450px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    margin: 10px;
+    font-family: Gilroy, Arial, sans-serif !important;
+}
+
+.restaurant-card img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.restaurant-card:hover{
+    box-shadow: 4px 4px 8px #f9bf98;
+    transition: box-shadow 0.3s ease-in-out;
+    border: 0px solid #ccc;
+}
+
+.search-box {
+    width: 15%;
+    padding: 10px;
+    margin: 20px;
+}
+
+.search-btn {
+    padding: 10px 20px;
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.filter-container {
+    display: flex;
+    margin: 20px;
+}
+
+.filter-button {
+    padding: 10px 20px;
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.filter-button:hover {
+    background-color: #e65c00;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.reset-container {
+    display: flex;
+}
+
+.reset-button {
+    padding: 10px 20px;
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.reset-button:hover {
+    background-color: #e65c00;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.shimmer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    padding: 20px;
+    margin-top: 100px;
+}
+
+.shimmer-card {
+    width: 270px;
+    height: 500px;
+    margin: 10px;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 8px;
+}
+
+.login-logout-btn {
+    padding: 10px 10px;
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px;
 }
