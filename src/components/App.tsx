@@ -8,6 +8,8 @@ import AboutUs from "./header/AboutUs";
 import ContactUs from "./ContactUs";
 import { createTheme, ThemeProvider } from "@mui/material";
 import Services from "./Services";
+import ErrorPage from "./ErrorPage";
+import RestaurantMenu from "./RestaurantMenu";
 
 const AppLayout = () => {
   return (
@@ -25,7 +27,7 @@ const appRouter = createBrowserRouter([
   {
     path: "/",
     element: <AppLayout />,
-    errorElement: <h1>404 Not Found!</h1>,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -42,6 +44,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/services",
         element: <Services />
+      },
+      {
+        path: "/restaurant/:resId",
+        element: <RestaurantMenu/>
       }
     ],
   },

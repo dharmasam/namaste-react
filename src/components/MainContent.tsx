@@ -1,6 +1,8 @@
 import { RestaurantCard } from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
+import { FETCH_RESTAURANTS_API_URL } from "../utils/constants";
 
 type Restaurant = {
   info: {
@@ -19,7 +21,7 @@ export const MainContent = () => {
   }, []);
   console.log("MainContent Rendered");
   const fetchData = async () => {
-    const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.8452145&lng=77.6601695&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+    const data = await fetch(FETCH_RESTAURANTS_API_URL);
     if (data.ok) {
       const jsonData = await data.json();
       const initRestaurantList = jsonData?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
@@ -37,7 +39,7 @@ export const MainContent = () => {
 
   return restaurantList.length === 0 ? <Shimmer /> : (
     <div className="main">
-      <div style={{ display: "flex", alignItems: "center", padding: "10px" }}>
+      <div style={{ display: "flex", alignItems: "center", padding: "10px", justifyContent: "center" }}>
         <input type="text" className="search-box" value={searchText} onChange={(event) => {
           setSearchText(event.target.value);
         }} />
@@ -64,7 +66,7 @@ export const MainContent = () => {
 
       <div className="main-content">
         {filteredRestaurantList.map((restaurant: Restaurant) => {
-          return <RestaurantCard key={restaurant.info.id} resData={restaurant} />;
+          return <Link to={"/restaurant/"+restaurant.info.id} key={restaurant.info.id}><RestaurantCard  resData={restaurant} /></Link>;
         })}
       </div>
     </div>
