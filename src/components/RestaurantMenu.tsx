@@ -2,44 +2,28 @@ import { useEffect, useState } from "react";
 import { MENU_API_URL } from "../utils/constants";
 import { useParams } from "react-router-dom";
 import Shimmer from "./Shimmer";
-
-interface RestaurantInfo {
-    cards: any[];
-    // Add more fields as needed based on your API response
-}
+import useFetchRestaurantMenu from "../utils/useFetchRestaurantMenu";
+import RestaurantHeader from "./RestaurantHeader";
+import ItemCategory from "./ItemCategory";
 
 const RestaurantMenu = () => {
-    const [restaurantInfo, setRestaurantInfo] = useState<RestaurantInfo | null>(null);
-    useEffect(() => {
-        fetchData();
-    }, []);
-
     const params = useParams();
-    console.log("RestaurantMenu params" + JSON.stringify(params));
-
-    const fetchData = async () => {
-        const data = await fetch(MENU_API_URL + params.resId);
-        if (data.ok) {
-            const jsonData = await data.json();
-            console.log("RestaurantMenu fetchData" + jsonData.data.cards);
-            setRestaurantInfo(jsonData?.data);
-        }
-    }
+    const restaurantInfo = useFetchRestaurantMenu(params);
     if (restaurantInfo === null) {
         return <Shimmer />
     }
-    const { name } = restaurantInfo?.cards[2]?.card?.card?.info;
     const menutItems = restaurantInfo && restaurantInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards;
+    const categories = restaurantInfo && restaurantInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter((category: any) => category.card?.card?.["@type"].includes("ItemCategory") || category.card?.card?.["@type"].includes("NestedItemCategory"));
     return (
-        <div>
-            <h1>Restaurant Menu Page</h1>
-            <h2>{name}</h2>
-            <h3>Menu Items:</h3>
-            <ul>
-                {menutItems && menutItems.map((item: any) => (
-                    <li key={item.card.info.id}>{item.card.info.name} - Rs.{item.card.info.price / 100 || item.card.info.defaultPrice / 100}</li>
-                ))}
-            </ul>
+        <div className="menu-container">
+            <RestaurantHeader props={restaurantInfo?.cards[2]?.card?.card?.info} />
+            <div className="menu">
+                {
+                    categories.map((category: any) => (
+                        <ItemCategory key={category.card.card.title} data={category.card.card} />
+                    ))
+                }
+            </div>
         </div>
     );
 }

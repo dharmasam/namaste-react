@@ -39,34 +39,36 @@ export const MainContent = () => {
 
   return restaurantList.length === 0 ? <Shimmer /> : (
     <div className="main">
-      <div style={{ display: "flex", alignItems: "center", padding: "10px", justifyContent: "center" }}>
-        <input type="text" className="search-box" value={searchText} onChange={(event) => {
-          setSearchText(event.target.value);
-        }} />
+      <div>
+        <div style={{ display: "flex", alignItems: "center", padding: "10px", marginRight: "auto" }}>
+          <input type="text" className="search-box" value={searchText} onChange={(event) => {
+            setSearchText(event.target.value);
+          }} />
 
-        <button className="search-btn" onClick={() => {
-          const filteredList = restaurantList.filter(restaurant =>
-            restaurant?.info?.name?.toLowerCase().includes(searchText.toLowerCase())
-          );
-          setFilteredRestaurantList(filteredList);
-        }}>Search</button>
+          <button className="search-btn" onClick={() => {
+            const filteredList = restaurantList.filter(restaurant =>
+              restaurant?.info?.name?.toLowerCase().includes(searchText.toLowerCase())
+            );
+            setFilteredRestaurantList(filteredList);
+          }}>Search</button>
 
-        <div className="filter-container">
-          <button className="filter-button" onClick={() => {
-            findTopRestaurant();
-          }}>Top Rated Restaurants</button>
+          <div className="filter-container">
+            <button className="filter-button" onClick={() => {
+              findTopRestaurant();
+            }}>Top Rated Restaurants</button>
 
-        </div>
-        <div className="reset-container">
-          <button className="reset-button" onClick={() => {
-            setFilteredRestaurantList(restaurantList);
-          }}>Reset</button>
+          </div>
+          <div className="reset-container">
+            <button className="reset-button" onClick={() => {
+              setFilteredRestaurantList(restaurantList);
+            }}>Reset</button>
+          </div>
         </div>
       </div>
 
       <div className="main-content">
         {filteredRestaurantList.map((restaurant: Restaurant) => {
-          return <Link to={"/restaurant/"+restaurant.info.id} key={restaurant.info.id}><RestaurantCard  resData={restaurant} /></Link>;
+          return <Link to={"/restaurant/" + restaurant.info.id} key={restaurant.info.id}><RestaurantCard resData={restaurant} /></Link>;
         })}
       </div>
     </div>

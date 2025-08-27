@@ -1,15 +1,22 @@
-import React from "react";
+import React, { lazy, StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import { Logo } from "./header/Logo";
 import { NavigationBar } from "./header/NavigationBar";
 import { MainContent } from "./MainContent";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-import AboutUs from "./header/AboutUs";
-import ContactUs from "./ContactUs";
+// import AboutUs from "./header/AboutUs";
+// import ContactUs from "./ContactUs";
 import { createTheme, ThemeProvider } from "@mui/material";
-import Services from "./Services";
+// import Services from "./Services";
 import ErrorPage from "./ErrorPage";
-import RestaurantMenu from "./RestaurantMenu";
+// import RestaurantMenu from "./RestaurantMenu";
+// import Grocery from "./Grocery";
+
+const Grocery = lazy(() => import("./Grocery"));
+const AboutUs = lazy(() => import("./header/AboutUs"));
+const ContactUs = lazy(() => import("./ContactUs"));
+const Services = lazy(() => import("./Services"));
+const RestaurantMenu = lazy(() => import("./RestaurantMenu"));
 
 const AppLayout = () => {
   return (
@@ -48,6 +55,12 @@ const appRouter = createBrowserRouter([
       {
         path: "/restaurant/:resId",
         element: <RestaurantMenu/>
+      },
+      {
+        path: "/groceries",
+        // element: <React.Suspense fallback={<h1>Loading...</h1>}><Grocery /></React.Suspense>
+                element: <Grocery />
+
       }
     ],
   },
@@ -73,7 +86,10 @@ const theme = createTheme({
 });
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <ThemeProvider theme={theme}>
-    <RouterProvider router={appRouter} />
-  </ThemeProvider>
+  <StrictMode>
+
+    <ThemeProvider theme={theme}>
+      <RouterProvider router={appRouter} />
+    </ThemeProvider>
+  </StrictMode>
 );
