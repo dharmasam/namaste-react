@@ -11,13 +11,10 @@ const useFetchRestaurantMenu = (params) => {
         fetchData();
     }, []);
 
-    console.log("RestaurantMenu params" + params.resId);
-
     const fetchData = async () => {
         const data = await fetch(MENU_API_URL + params.resId);
         if (data.ok) {
             const jsonData = await data.json();
-            console.log("RestaurantMenu fetchData" + jsonData.data.cards);
             setRestaurantInfo(jsonData?.data);
         }
     }

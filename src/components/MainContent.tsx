@@ -19,7 +19,6 @@ export const MainContent = () => {
   useEffect(() => {
     fetchData();
   }, []);
-  console.log("MainContent Rendered");
   const fetchData = async () => {
     const data = await fetch(FETCH_RESTAURANTS_API_URL);
     if (data.ok) {

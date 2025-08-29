@@ -1,16 +1,14 @@
 import { ITEM_IMAGE_URL } from "../utils/constants";
 
 const ItemList = (props) => {
-    console.log(props);
     const { title, itemCards, categories } = props.data;
-    console.log(title);
     return (
         <div className="item-list">
             {itemCards && itemCards.map((item) => (
                 <div key={item.card.info.id} className="item">
                     <div className="item-info">
                         <h4>{item.card.info.name}</h4>
-                        <p>{item.card.info.description}</p>
+                        <p className="item-description">{item.card.info.description.substring(0, 150)}...</p>
                         <p>₹ {item.card.info.price / 100 || item.card.info.defaultPrice / 100}</p>
                     </div>
                     <div>
@@ -28,7 +26,7 @@ const ItemList = (props) => {
                             <div key={item.card.info.id} className="item">
                                 <div className="item-info">
                                     <h4>{item.card.info.name}</h4>
-                                    <p>{item.card.info.description}</p>
+                                    <p className="item-description">{item.card.info.description.substring(0, 150)}...</p>
                                     <p>₹ {item.card.info.price / 100 || item.card.info.defaultPrice / 100}</p>
                                 </div>
                                 <div>

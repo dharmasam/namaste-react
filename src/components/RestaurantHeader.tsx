@@ -1,6 +1,5 @@
 const RestaurantHeader = (props) => {
     const { name, avgRating, costForTwoMessage, totalRatings, cuisines } = props.props;
-    console.log("RestaurantHeader Rendered");
     return (
         <div className="restaurant-header">
             <div className="res-header-name">{name}</div>

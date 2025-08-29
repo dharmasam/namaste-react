@@ -1,4 +1,4 @@
-import React, { lazy, StrictMode } from "react";
+import React, { lazy, StrictMode, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { Logo } from "./header/Logo";
 import { NavigationBar } from "./header/NavigationBar";
@@ -11,6 +11,7 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import ErrorPage from "./ErrorPage";
 // import RestaurantMenu from "./RestaurantMenu";
 // import Grocery from "./Grocery";
+import { UserContext } from "../utils/UserContext";
 
 const Grocery = lazy(() => import("./Grocery"));
 const AboutUs = lazy(() => import("./header/AboutUs"));
@@ -19,13 +20,16 @@ const Services = lazy(() => import("./Services"));
 const RestaurantMenu = lazy(() => import("./RestaurantMenu"));
 
 const AppLayout = () => {
+  const [user, setUser] = useState({ name: "Guest", email: "" });
   return (
     <div className="app-container">
+      <UserContext.Provider value={{user, setUser}}>
       <div className="header-container">
         <Logo />
         <NavigationBar />
       </div>
       <Outlet />
+      </UserContext.Provider>
     </div>
   );
 };
