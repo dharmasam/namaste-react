@@ -8,7 +8,22 @@ const ItemCategory: any = (props) => {
         <div className="item-category">
             <div className="category-title" onClick={props.setShowIndex}>
                 <div>{title}</div>
-                <span>🔽</span>
+                <button
+                    type="button"
+                    className="dropdown-btn"
+                    aria-label={props.showItems ? "Collapse" : "Expand"}
+                    style={{
+                        background: "none",
+                        border: "none",
+                        cursor: "pointer",
+                        fontSize: "1.2rem",
+                        marginLeft: "8px",
+                        transition: "transform 0.2s",
+                        transform: props.showItems ? "rotate(180deg)" : "rotate(0deg)"
+                    }}
+                >
+                ▼
+                </button>
             </div>
             {props.showItems && <div className="item-list">
                 <ItemList data={{ title, itemCards, categories }} />

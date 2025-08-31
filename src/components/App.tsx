@@ -1,7 +1,7 @@
 import React, { lazy, StrictMode, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { Logo } from "./header/Logo";
-import { NavigationBar } from "./header/NavigationBar";
+import Header from "./header/Header";
 import { MainContent } from "./MainContent";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 // import AboutUs from "./header/AboutUs";
@@ -12,25 +12,29 @@ import ErrorPage from "./ErrorPage";
 // import RestaurantMenu from "./RestaurantMenu";
 // import Grocery from "./Grocery";
 import { UserContext } from "../utils/UserContext";
+import { Provider } from "react-redux";
+import appStore from "../utils/appStore";
 
 const Grocery = lazy(() => import("./Grocery"));
 const AboutUs = lazy(() => import("./header/AboutUs"));
 const ContactUs = lazy(() => import("./ContactUs"));
-const Services = lazy(() => import("./Services"));
 const RestaurantMenu = lazy(() => import("./RestaurantMenu"));
+const Cart = lazy(() => import("./Cart"));
 
 const AppLayout = () => {
   const [user, setUser] = useState({ name: "Guest", email: "" });
   return (
+    <Provider store={appStore}>
     <div className="app-container">
       <UserContext.Provider value={{user, setUser}}>
       <div className="header-container">
         <Logo />
-        <NavigationBar />
+        <Header />
       </div>
       <Outlet />
       </UserContext.Provider>
     </div>
+    </Provider>
   );
 };
 
@@ -53,10 +57,6 @@ const appRouter = createBrowserRouter([
         element: <ContactUs />
       },
       {
-        path: "/services",
-        element: <Services />
-      },
-      {
         path: "/restaurant/:resId",
         element: <RestaurantMenu/>
       },
@@ -64,21 +64,12 @@ const appRouter = createBrowserRouter([
         path: "/groceries",
         // element: <React.Suspense fallback={<h1>Loading...</h1>}><Grocery /></React.Suspense>
                 element: <Grocery />
-
+      },
+      {
+        path: "/cart",
+        element: <Cart />
       }
     ],
-  },
-  {
-    path: "/about",
-    element: <AboutUs />
-  },
-  {
-    path: "/contactUs",
-    element: <ContactUs />
-  },
-  {
-    path: "/services",
-    element: <Services />
   }
 ]);
 const theme = createTheme({

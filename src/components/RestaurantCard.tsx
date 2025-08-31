@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Card, CardContent, CardMedia, Typography, Box, Chip, Stack } from "@mui/material";
 import { RestaurantCardImageUrl } from "../utils/constants";
+import {UserContext} from "../utils/UserContext"
 
 export const RestaurantCard = ({ resData }) => {
   const { name, costForTwo, cuisines, cloudinaryImageId, avgRating, sla } = resData.info;
-
+    const { user, setUser } = useContext(UserContext);
   return (
     <Card sx={{ width: 250, height: 450, borderRadius: 2, boxShadow: 3, m: 1, cursor: "pointer", "&:hover": { boxShadow: 6, backgroundColor: '#f9f4f0ff' } }}>
       <CardMedia
@@ -27,6 +28,9 @@ export const RestaurantCard = ({ resData }) => {
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {cuisines.join(", ")}
+        </Typography>
+        <Typography variant="body2" color="text.secondary" gutterBottom>
+          {user.name}
         </Typography>
       </CardContent>
     </Card>

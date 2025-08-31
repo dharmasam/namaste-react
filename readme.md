@@ -13,6 +13,10 @@ Body
  - Rating
  - Cuisines
  - Time to Deliver
+ - use context
+ - install @reduxjs/toolkit and react-redux
+ - build out store
+ - Connect our store to our app
 
 Footer
 - Copyright

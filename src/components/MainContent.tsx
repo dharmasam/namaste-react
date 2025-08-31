@@ -1,8 +1,9 @@
 import { RestaurantCard } from "./RestaurantCard";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { FETCH_RESTAURANTS_API_URL } from "../utils/constants";
+import { UserContext } from "../utils/UserContext";
 
 type Restaurant = {
   info: {
@@ -16,6 +17,7 @@ export const MainContent = () => {
   const [restaurantList, setRestaurantList] = useState<Restaurant[]>([]);
   const [searchText, setSearchText] = useState("");
   const [filteredRestaurantList, setFilteredRestaurantList] = useState<Restaurant[]>([]);
+  const {user, setUser} = useContext(UserContext);
   useEffect(() => {
     fetchData();
   }, []);
@@ -42,6 +44,7 @@ export const MainContent = () => {
         <div style={{ display: "flex", alignItems: "center", padding: "10px", marginRight: "auto" }}>
           <input type="text" className="search-box" value={searchText} onChange={(event) => {
             setSearchText(event.target.value);
+            setUser({name: event.target.value, email: ""});
           }} />
 
           <button className="search-btn" onClick={() => {
